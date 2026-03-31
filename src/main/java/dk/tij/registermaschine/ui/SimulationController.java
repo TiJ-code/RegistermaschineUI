@@ -1,15 +1,17 @@
 package dk.tij.registermaschine.ui;
 
+import dk.tij.registermaschine.api.compilation.compiling.ICompiledProgram;
+import dk.tij.registermaschine.api.runtime.ExecutionSnapshot;
 import dk.tij.registermaschine.core.compilation.Pipeline;
-import dk.tij.registermaschine.core.compilation.api.compiling.ICompiledProgram;
 import dk.tij.registermaschine.core.config.ConcreteInstructionSet;
 import dk.tij.registermaschine.core.config.CoreConfigParser;
 import dk.tij.registermaschine.core.runtime.ConcreteExecutionContext;
-import dk.tij.registermaschine.core.runtime.ExecutionSnapshot;
 import dk.tij.registermaschine.core.runtime.Executor;
+
 import dk.tij.registermaschine.ui.listeners.ExecutionListener;
 import dk.tij.registermaschine.ui.ui.JavaScriptBridge;
 import dk.tij.registermaschine.ui.utils.AlertTypes;
+
 import javafx.application.Platform;
 
 import java.util.concurrent.Executors;

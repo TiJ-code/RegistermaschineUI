@@ -1,11 +1,9 @@
 package dk.tij.registermaschine.ui.utils;
 
-import dk.tij.registermaschine.core.config.ConfigInstruction;
-import dk.tij.registermaschine.core.instructions.api.IInstructionSet;
+import dk.tij.registermaschine.api.config.ConfigInstruction;
+import dk.tij.registermaschine.api.instructions.IInstructionSet;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class InstructionMapper {
     public static List<InstructionDefinition> toDocList(IInstructionSet set) {

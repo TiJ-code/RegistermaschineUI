@@ -40,7 +40,6 @@ jobs:
         with:
           java-version: '25'
           distribution: temurin
-          server-id: 'github'
 
       - name: Calculate & Set New Version
         id: versioning
@@ -67,6 +66,7 @@ jobs:
           mvn versions:set -DnewVersion=$NEW_VER -DgenerateBackupPoms=false
 
       - name: Commit & Push to Development
+        if: github.event.inputs.bump_type != 'test'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -75,26 +75,8 @@ jobs:
           git commit -am "[ACTION] bump version to ${{ steps.versioning.outputs.NEW_VER }}"
           git push origin main
           
-          git tag pom-v${{ steps.versioning.outputs.NEW_VER }}
-          git push origin pom-v${{ steps.versioning.outputs.NEW_VER }}
-
-      - name: Squash Merge Into Releases
-        shell: bash
-        run: |
-          git fetch origin releases
-          git checkout releases
-          
-          git merge --squash main
-          
-          git commit -m "Release v${{ steps.versioning.outputs.NEW_VER }}"
-          git push origin releases
-
-      - name: Tag it
-        shell: bash
-        run: |
           git tag release-v${{ steps.versioning.outputs.NEW_VER }}
           git push origin release-v${{ steps.versioning.outputs.NEW_VER }}
-          
 
   build:
     needs: version-bump
@@ -110,11 +92,32 @@ jobs:
           fetch-tags: true
           ref: release-v${{ needs.version-bump.outputs.new_version }}
 
+      - name: Setup Maven settings
+        shell: bash
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github-registermaschine</id>
+                <username>TiJ-code</username>
+                <password>${{ secrets.PACKAGE_TOKEN }}</password>
+              </server>
+              <server>
+                <id>github-jissuesystem</id>
+                <username>TiJ-code</username>
+                <password>${{ secrets.PACKAGE_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 25
+          overwrite-settings: false
 
       - name: Build JAR
         run: mvn -B clean package -DskipTests
@@ -123,7 +126,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jar
-          path: target/*.jar
+          path: target/ui*.jar
 
   package-and-release:
     needs: [version-bump, build]
@@ -158,8 +161,9 @@ jobs:
           
           VER=${{ needs.version-bump.outputs.new_version }}
           
-          JAR=$(find . -name "*.jar" | head -n 1}
+          JAR=$(find . -name "*.jar" | head -n 1)
           cp "$JAR" app.jar
+          cp "$JAR" dist/ui-v${VER}.jar
           
           jlink \
             --add-modules java.base,java.desktop,java.logging,java.net.http,jdk.unsupported,jdk.crypto.ec,jdk.charsets,java.management,java.scripting,jdk.jsobject \
@@ -190,13 +194,11 @@ jobs:
       - name: Upload to Single Release
         uses: softprops/action-gh-release@v2
         with:
+          name: UI v${{ needs.version-bump.outputs.new_version }}
           tag_name: release-v${{ needs.version-bump.outputs.new_version }}
           files: dist/*
           append_body: true
-          make_latest: true
-          name: ${{ steps.tags.outputs.name }}
           generate_release_notes: ${{ matrix.os == 'ubuntu-latest' }}
-          draft: ${{ github.event.inputs.bump_type  == 'test' }}
+          draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

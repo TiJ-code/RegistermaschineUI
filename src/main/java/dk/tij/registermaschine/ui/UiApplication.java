@@ -1,6 +1,6 @@
 package dk.tij.registermaschine.ui;
 
-import dk.tij.registermaschine.core.instructions.api.IInstructionSet;
+import dk.tij.registermaschine.api.instructions.IInstructionSet;
 import dk.tij.registermaschine.core.config.CoreConfig;
 import dk.tij.registermaschine.core.config.CoreConfigParser;
 import dk.tij.registermaschine.core.config.ConcreteInstructionSet;

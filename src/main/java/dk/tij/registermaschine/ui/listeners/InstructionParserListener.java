@@ -1,8 +1,8 @@
 package dk.tij.registermaschine.ui.listeners;
 
-import dk.tij.registermaschine.core.config.ConfigInstruction;
-import dk.tij.registermaschine.core.config.api.IConfigEventListener;
-import dk.tij.registermaschine.core.config.api.ParsingEvent;
+import dk.tij.registermaschine.api.config.ConfigInstruction;
+import dk.tij.registermaschine.api.config.IConfigEventListener;
+import dk.tij.registermaschine.api.config.ParsingEvent;
 import dk.tij.registermaschine.ui.UiApplication;
 
 public class InstructionParserListener implements IConfigEventListener {

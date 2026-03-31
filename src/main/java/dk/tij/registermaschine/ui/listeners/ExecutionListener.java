@@ -1,8 +1,8 @@
 package dk.tij.registermaschine.ui.listeners;
 
 import dk.tij.registermaschine.core.config.CoreConfig;
-import dk.tij.registermaschine.core.runtime.api.IExecutionContext;
-import dk.tij.registermaschine.core.runtime.api.IExecutionContextListener;
+import dk.tij.registermaschine.api.runtime.IExecutionContext;
+import dk.tij.registermaschine.api.runtime.IExecutionContextListener;
 import dk.tij.registermaschine.ui.ui.JavaScriptBridge;
 import dk.tij.registermaschine.ui.utils.AlertTypes;
 

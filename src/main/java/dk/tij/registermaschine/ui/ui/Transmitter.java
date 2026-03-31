@@ -1,6 +1,6 @@
 package dk.tij.registermaschine.ui.ui;
 
-import dk.tij.registermaschine.core.runtime.ExecutionSnapshot;
+import dk.tij.registermaschine.api.runtime.ExecutionSnapshot;
 import dk.tij.registermaschine.ui.annotations.ToJava;
 import dk.tij.registermaschine.ui.annotations.ToUi;
 import dk.tij.registermaschine.ui.utils.AlertTypes;

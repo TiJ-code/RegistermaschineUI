@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <name>Registermaschine UI</name>
-    <version>2.0.0.test</version>
+    <version>1.999.999</version>
     <groupId>dk.tij.registermaschine</groupId>
     <artifactId>ui</artifactId>
 
@@ -18,8 +18,12 @@
 
     <repositories>
         <repository>
-            <id>github</id>
+            <id>github-jissuesystem</id>
             <url>https://maven.pkg.github.com/TiJ-code/JIssueSystem</url>
+        </repository>
+        <repository>
+            <id>github-registermaschine</id>
+            <url>https://maven.pkg.github.com/TiJ-code/Registermaschine</url>
         </repository>
     </repositories>
 
@@ -28,7 +32,16 @@
             <groupId>dk.tij.registermaschine</groupId>
             <artifactId>core</artifactId>
             <version>${registermaschine-core.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.tij.registermaschine</groupId>
+            <artifactId>api</artifactId>
+            <version>${registermaschine-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.tij.registermaschine</groupId>
+            <artifactId>instructions</artifactId>
+            <version>${registermaschine-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
