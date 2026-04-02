@@ -44,7 +44,7 @@ function initialiseDocs(instructions) {
     for (let i = 0; i < insArray.length; i++) {
         cards.push(`
             <div class="instr-item">
-                <span class="instr-name">${insArray[i].name().toUpperCase()}</span>
+                <span class="instr-name">${insArray[i].usage()}</span>
                 <span class="instr-desc">${insArray[i].description()}</span>
             </div>
         `);
