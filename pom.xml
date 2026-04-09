@@ -13,7 +13,7 @@
         <maven.compiler.target>25</maven.compiler.target>
         <javafx.version>23.0.1</javafx.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <registermaschine-core.version>1.0.0</registermaschine-core.version>
+        <registermaschine-core.version>1.0.2</registermaschine-core.version>
     </properties>
 
     <repositories>
