@@ -166,6 +166,7 @@ jobs:
           cp "$JAR" dist/ui-v${VER}.jar
           
           jlink \
+            --add-options=--enable-native-access=javafx.web,javafx.graphics \
             --add-modules java.base,java.desktop,java.logging,java.net.http,jdk.unsupported,jdk.crypto.ec,jdk.charsets,java.management,java.scripting,jdk.jsobject \
             --output runtime \
             --strip-debug \
@@ -178,11 +179,11 @@ jobs:
           
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
             echo "@echo off" > bundle/start.bat
-            echo "jre\\bin\\java -jar app.jar" >> bundle/start.bat
+            echo "jre\\bin\\java --enable-native-access=javafx.web,javafx.graphics -jar app.jar" >> bundle/start.bat
             7z a "dist/ui-${VER}-windows.zip" ./bundle/*
           else
             echo "#!/bin/sh" > bundle/start.sh
-            echo "./jre/bin/java -jar app.jar" >> bundle/start.sh
+            echo "./jre/bin/java --enable-native-access=javafx.web,javafx.graphics -jar app.jar" >> bundle/start.sh
             chmod +x bundle/start.sh
           
             OS_NAME="linux"
