@@ -13,7 +13,7 @@
         <maven.compiler.target>25</maven.compiler.target>
         <javafx.version>23.0.1</javafx.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <registermaschine-core.version>1.0.2</registermaschine-core.version>
+        <registermaschine-core.version>1.1.0</registermaschine-core.version>
     </properties>
 
     <repositories>
@@ -102,6 +102,34 @@
                                     <mainClass>dk.tij.registermaschine.ui.ApplicationLauncher</mainClass>
                                 </transformer>
                             </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.7.0</version>
+
+                <executions>
+                    <execution>
+                        <id>copy-plugins</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/bundle/plugins</outputDirectory>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>dk.tij.registermaschine</groupId>
+                                    <artifactId>instructions</artifactId>
+                                    <version>${registermaschine-core.version}</version>
+                                    <type>jar</type>
+                                    <destFileName>registermaschine-default-instructions.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                 </executions>
