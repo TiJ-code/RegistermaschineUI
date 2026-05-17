@@ -75,8 +75,8 @@ jobs:
           git commit -am "[ACTION] bump version to ${{ steps.versioning.outputs.NEW_VER }}"
           git push origin main
           
-          git tag release-v${{ steps.versioning.outputs.NEW_VER }}
-          git push origin release-v${{ steps.versioning.outputs.NEW_VER }}
+          git tag releases/v${{ steps.versioning.outputs.NEW_VER }}
+          git push origin releases/v${{ steps.versioning.outputs.NEW_VER }}
 
   build:
     needs: version-bump
@@ -90,7 +90,7 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-          ref: release-v${{ needs.version-bump.outputs.new_version }}
+          ref: releases/v${{ needs.version-bump.outputs.new_version }}
 
       - name: Setup Maven settings
         shell: bash
@@ -119,14 +119,34 @@ jobs:
           java-version: 25
           overwrite-settings: false
 
+      - name: Create Artifacts Directory
+        shell: bash
+        run: mkdir -p artifacts/plugins
+
       - name: Build JAR
         run: mvn -B clean package -DskipTests
+
+      - name: Pack Archive
+        shell: bash
+        run: |
+          mkdir -p artifacts/plugins
+          
+          cp target/ui*.jar artifacts/.
+          if [ -d "target/bundle/plugins" ]; then
+            cp -r target/bundle/plugins/. artifacts/plugins/
+          else
+            echo "WARNING: No plugins directory generated"
+          fi
+          
+          cd artifacts
+          zip -r ../artifacts.zip .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: jar
-          path: target/ui*.jar
+          path: artifacts.zip
+          retention-days: 2
 
   package-and-release:
     needs: [version-bump, build]
@@ -153,6 +173,10 @@ jobs:
           distribution: temurin
           java-version: 25
 
+      - name: Unpack Archive
+        shell: bash
+        run: unzip -q artifacts.zip -d artifacts
+
       - name: Package
         shell: bash
         run: |
@@ -161,12 +185,12 @@ jobs:
           
           VER=${{ needs.version-bump.outputs.new_version }}
           
-          JAR=$(find . -name "*.jar" | head -n 1)
+          JAR=$(ls artifacts/*.jar | head -n 1)
           cp "$JAR" app.jar
           cp "$JAR" dist/ui-v${VER}.jar
           
           jlink \
-            --add-options=--enable-native-access=javafx.web,javafx.graphics \
+            --add-options="--enable-native-access=javafx.web,javafx.graphics" \
             --add-modules java.base,java.desktop,java.logging,java.net.http,jdk.unsupported,jdk.crypto.ec,jdk.charsets,java.management,java.scripting,jdk.jsobject \
             --output runtime \
             --strip-debug \
@@ -174,6 +198,13 @@ jobs:
             --no-man-pages
           
           mkdir -p bundle
+          
+          if [ -d "artifacts/plugins" ]; then
+            cp -r artifacts/plugins/. bundle/plugins/
+          else
+            echo "WARNING: No plugins in artifact"
+          fi
+          
           mv runtime bundle/jre
           mv app.jar bundle/
           
@@ -196,7 +227,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: UI v${{ needs.version-bump.outputs.new_version }}
-          tag_name: release-v${{ needs.version-bump.outputs.new_version }}
+          tag_name: releases/v${{ needs.version-bump.outputs.new_version }}
           files: dist/*
           append_body: true
           generate_release_notes: ${{ matrix.os == 'ubuntu-latest' }}
