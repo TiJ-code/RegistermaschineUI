@@ -9,7 +9,7 @@ import dk.tij.registermaschine.core.runtime.ConcreteExecutionContext;
 import dk.tij.registermaschine.core.runtime.Executor;
 
 import dk.tij.registermaschine.ide.listeners.ExecutionListener;
-import dk.tij.registermaschine.ide.ui.JavaScriptBridge;
+import dk.tij.registermaschine.ide.ui.old.JavaScriptBridge;
 import dk.tij.registermaschine.ide.utils.AlertTypes;
 
 import javafx.application.Platform;

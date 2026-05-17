@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registermaschine IDE</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="components/menubar/menubar.css">
+    <link rel="stylesheet" href="components/cards/cards.css">
+    <link rel="stylesheet" href="components/editor/editor.css">
+    <link rel="stylesheet" href="components/layout/layout.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+</head>
+
+<body>
+    <script>
+        require.config({ paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs" } });
+    </script>
+
+<div id="topbar">
+    <div class="menu-item" id="fileMenu">
+        File
+        <div class="dropdown" id="fileDropdown">
+            <div class="dropdown-item" onclick="newFile()">New File</div>
+            <div class="dropdown-item" onclick="openFile()">Open...</div>
+            <div class="dropdown-item" onclick="saveFile()">Save</div>
+            <div class="dropdown-item" onclick="saveAsFile()">Save As</div>
+        </div>
+    </div>
+</div>
+
+<div id="app"></div>
+
+<script src="components/layout/layout.js"></script>
+<script src="components/menubar/menubar.js"></script>
+
+</body>
+</html>

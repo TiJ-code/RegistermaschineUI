@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #1e1e1e;
+    font-family: sans-serif;
+}
+
+
+#app {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.row {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.panel {
+    background: #252526;
+    border: 1px solid #333;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    height: 28px;
+    background: #2d2d2d;
+    color: #ccc;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid #333;
+}
+
+.panel-body {
+    flex: 1;
+    overflow: auto;
+}
+
+
+.split {
+    background: #111;
+    width: 4px;
+    cursor: col-resize;
+}

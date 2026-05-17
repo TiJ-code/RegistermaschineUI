@@ -1,0 +1,65 @@
+#workspace {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: #1e1e1e;
+    overflow: hidden;
+}
+
+
+.card {
+    position: absolute;
+    width: 280px;
+    height: 180px;
+
+    background: #252526;
+    border: 1px solid #333;
+    border-radius: 6px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    color: #ddd;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.card-header {
+    height: 28px;
+    background: #2d2d2d;
+    cursor: grab;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8px;
+    font-size: 12px;
+    user-select: none;
+}
+
+.card-header:active {
+    cursor: grabbing;
+}
+
+
+.card-body {
+    flex: 1;
+    padding: 8px;
+    font-size: 13px;
+    overflow: auto;
+}
+
+
+.card-close {
+    cursor: pointer;
+    padding: 0 6px;
+}
+
+.card-close:hover {
+    background: #444;
+    border-radius: 4px;
+}

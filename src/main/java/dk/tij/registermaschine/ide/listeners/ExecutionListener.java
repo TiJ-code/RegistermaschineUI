@@ -3,7 +3,7 @@ package dk.tij.registermaschine.ide.listeners;
 import dk.tij.registermaschine.core.config.CoreConfig;
 import dk.tij.registermaschine.api.runtime.IExecutionContext;
 import dk.tij.registermaschine.api.runtime.IExecutionContextListener;
-import dk.tij.registermaschine.ide.ui.JavaScriptBridge;
+import dk.tij.registermaschine.ide.ui.old.JavaScriptBridge;
 import dk.tij.registermaschine.ide.utils.AlertTypes;
 
 public final class ExecutionListener implements IExecutionContextListener {

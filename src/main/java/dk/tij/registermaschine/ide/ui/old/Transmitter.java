@@ -1,4 +1,4 @@
-package dk.tij.registermaschine.ide.ui;
+package dk.tij.registermaschine.ide.ui.old;
 
 import dk.tij.registermaschine.api.runtime.ExecutionSnapshot;
 import dk.tij.registermaschine.ide.annotations.ToUi;

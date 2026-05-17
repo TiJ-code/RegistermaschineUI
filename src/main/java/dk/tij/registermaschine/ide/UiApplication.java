@@ -1,11 +1,11 @@
 package dk.tij.registermaschine.ide;
 
 import dk.tij.registermaschine.api.instructions.IInstructionSet;
+import dk.tij.registermaschine.core.config.ConcreteInstructionSet;
 import dk.tij.registermaschine.core.config.CoreConfig;
 import dk.tij.registermaschine.core.config.CoreConfigParser;
-import dk.tij.registermaschine.core.config.ConcreteInstructionSet;
 import dk.tij.registermaschine.ide.listeners.InstructionParserListener;
-import dk.tij.registermaschine.ide.ui.JavaScriptBridge;
+import dk.tij.registermaschine.ide.ui.old.JavaScriptBridge;
 import dk.tij.registermaschine.ide.utils.FileHandler;
 import dk.tij.registermaschine.ide.utils.InstructionMapper;
 import javafx.application.Application;
@@ -19,7 +19,15 @@ import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Objects;
 
@@ -28,6 +36,7 @@ public class UiApplication extends Application {
     public static boolean DEBUG = false;
     public static boolean DEBUG_PARSING = false;
     public static boolean DEBUG_UI = false;
+    public static boolean EXPERIMENTAL_UI = false;
 
     private WebEngine webEngine;
 
@@ -50,6 +59,7 @@ public class UiApplication extends Application {
         DEBUG = System.getProperty("debug") != null;
         DEBUG_UI = DEBUG && System.getProperty("ui") != null;
         DEBUG_PARSING = DEBUG  && System.getProperty("parsing") != null;
+        EXPERIMENTAL_UI = System.getProperty("experimentalUi") != null;
 
         if (DEBUG) {
             System.out.println("[System] Debug mode activated...");
@@ -59,6 +69,9 @@ public class UiApplication extends Application {
         }
         if (DEBUG_PARSING) {
             System.out.println("[System] Debugging Parsing...");
+        }
+        if (EXPERIMENTAL_UI) {
+            System.out.println("[System] Using experimental UI");
         }
 
         launch(args);
@@ -94,10 +107,14 @@ public class UiApplication extends Application {
         WebView webView = new WebView();
         webEngine = webView.getEngine();
 
-        if (DEBUG_UI) {
-            webEngine.load(Path.of(DEV_RESOURCES_PATH, "ide.html").toAbsolutePath().toUri().toString());
+        if (EXPERIMENTAL_UI) {
+            webEngine.load(Objects.requireNonNull(getClass().getResource("/new/ide.html")).toExternalForm());
         } else {
-            webEngine.load(Objects.requireNonNull(getClass().getResource("/ide.html")).toExternalForm());
+            if (DEBUG_UI) {
+                webEngine.load(Path.of(DEV_RESOURCES_PATH, "ide.html").toAbsolutePath().toUri().toString());
+            } else {
+                webEngine.load(Objects.requireNonNull(getClass().getResource("/ide.html")).toExternalForm());
+            }
         }
 
         webEngine.getLoadWorker().stateProperty().addListener((_, _, newValue) -> {

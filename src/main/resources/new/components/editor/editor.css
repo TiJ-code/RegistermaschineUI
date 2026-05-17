@@ -1,0 +1,30 @@
+.tab-bar {
+    display: flex;
+    height: 28px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #333;
+    font-size: 12px;
+    overflow-x: auto;
+}
+
+.tab {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #aaa;
+    user-select: none;
+    border-right: 1px solid #333;
+}
+
+.tab.active {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.tab:hover {
+    background: #3a3a3a;
+}
+
+.editor-container {
+    width: 100%;
+    height: calc(100% - 28px);
+}

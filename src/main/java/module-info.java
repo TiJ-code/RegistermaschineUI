@@ -6,8 +6,9 @@ module dk.tij.registermaschine.ide {
     requires dk.tij.registermaschine.api;
     requires dk.tij.registermaschine.core;
     requires dk.tij.registermaschine.instructions;
+    requires java.desktop;
 
     opens dk.tij.registermaschine.ide to javafx.graphics;
-    opens dk.tij.registermaschine.ide.ui to javafx.graphics, javafx.web;
+    opens dk.tij.registermaschine.ide.ui.old to javafx.graphics, javafx.web;
     opens dk.tij.registermaschine.ide.utils to javafx.web;
 }
