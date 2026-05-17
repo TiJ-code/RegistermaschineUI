@@ -1,4 +1,4 @@
-package dk.tij.registermaschine.ui;
+package dk.tij.registermaschine.ide;
 
 public class ApplicationLauncher {
     static void main(String[] args) {

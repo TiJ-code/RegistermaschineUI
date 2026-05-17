@@ -1,17 +1,15 @@
-package dk.tij.registermaschine.ui;
+package dk.tij.registermaschine.ide;
 
 import dk.tij.registermaschine.api.instructions.IInstructionSet;
 import dk.tij.registermaschine.core.config.CoreConfig;
 import dk.tij.registermaschine.core.config.CoreConfigParser;
 import dk.tij.registermaschine.core.config.ConcreteInstructionSet;
-import dk.tij.registermaschine.ui.listeners.InstructionParserListener;
-import dk.tij.registermaschine.ui.ui.JavaScriptBridge;
-import dk.tij.registermaschine.ui.utils.FileHandler;
-import dk.tij.registermaschine.ui.utils.InstructionMapper;
+import dk.tij.registermaschine.ide.listeners.InstructionParserListener;
+import dk.tij.registermaschine.ide.ui.JavaScriptBridge;
+import dk.tij.registermaschine.ide.utils.FileHandler;
+import dk.tij.registermaschine.ide.utils.InstructionMapper;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

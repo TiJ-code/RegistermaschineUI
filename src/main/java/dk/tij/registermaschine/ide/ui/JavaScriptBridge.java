@@ -1,14 +1,12 @@
-package dk.tij.registermaschine.ui.ui;
+package dk.tij.registermaschine.ide.ui;
 
-import dk.tij.registermaschine.ui.SimulationController;
-import dk.tij.registermaschine.ui.annotations.ToJava;
-import dk.tij.registermaschine.ui.annotations.ToUi;
-import dk.tij.registermaschine.ui.utils.BugReport;
-import dk.tij.registermaschine.ui.utils.FileHandler;
-import javafx.application.Platform;
+import dk.tij.registermaschine.ide.SimulationController;
+import dk.tij.registermaschine.ide.annotations.ToJava;
+import dk.tij.registermaschine.ide.annotations.ToUi;
+import dk.tij.registermaschine.ide.utils.BugReport;
+import dk.tij.registermaschine.ide.utils.FileHandler;
 import netscape.javascript.JSObject;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class JavaScriptBridge {

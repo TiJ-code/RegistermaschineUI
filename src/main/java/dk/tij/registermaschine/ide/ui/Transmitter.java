@@ -1,9 +1,8 @@
-package dk.tij.registermaschine.ui.ui;
+package dk.tij.registermaschine.ide.ui;
 
 import dk.tij.registermaschine.api.runtime.ExecutionSnapshot;
-import dk.tij.registermaschine.ui.annotations.ToJava;
-import dk.tij.registermaschine.ui.annotations.ToUi;
-import dk.tij.registermaschine.ui.utils.AlertTypes;
+import dk.tij.registermaschine.ide.annotations.ToUi;
+import dk.tij.registermaschine.ide.utils.AlertTypes;
 import javafx.application.Platform;
 import netscape.javascript.JSObject;
 

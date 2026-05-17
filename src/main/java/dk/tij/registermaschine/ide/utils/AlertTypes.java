@@ -1,4 +1,4 @@
-package dk.tij.registermaschine.ui.utils;
+package dk.tij.registermaschine.ide.utils;
 
 public enum AlertTypes {
     ERROR,

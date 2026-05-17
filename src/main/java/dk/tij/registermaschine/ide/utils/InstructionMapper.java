@@ -1,4 +1,4 @@
-package dk.tij.registermaschine.ui.utils;
+package dk.tij.registermaschine.ide.utils;
 
 import dk.tij.registermaschine.api.compilation.compiling.OperandType;
 import dk.tij.registermaschine.api.config.ConfigInstruction;

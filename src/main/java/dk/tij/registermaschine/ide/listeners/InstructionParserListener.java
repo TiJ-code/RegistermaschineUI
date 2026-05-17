@@ -1,9 +1,9 @@
-package dk.tij.registermaschine.ui.listeners;
+package dk.tij.registermaschine.ide.listeners;
 
 import dk.tij.registermaschine.api.config.ConfigInstruction;
 import dk.tij.registermaschine.api.config.IConfigEventListener;
 import dk.tij.registermaschine.api.config.ParsingEvent;
-import dk.tij.registermaschine.ui.UiApplication;
+import dk.tij.registermaschine.ide.UiApplication;
 
 public class InstructionParserListener implements IConfigEventListener {
     @Override
